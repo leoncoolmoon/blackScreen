@@ -5,35 +5,42 @@
         body {
             height: 100vh;
             margin: 0;
-            background: white;
+            background: black;
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .fullscreen {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            background: black;
-            z-index: 9999;
-        }
     </style>
 </head>
 <body ondblclick="toggleFullScreen()">
-    <div id="fullscreen" class="fullscreen"></div>
+    <p>Double click the screen to toggle full screen!</p>
     <script>
         var fullscreen = false;
         function toggleFullScreen() {
-            var div = document.getElementById('fullscreen');
             if (!fullscreen) {
-                div.style.display = 'block';
+                if (document.documentElement.requestFullscreen) {
+                    document.documentElement.requestFullscreen();
+                } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
+                    document.documentElement.mozRequestFullScreen();
+                } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                    document.documentElement.webkitRequestFullscreen();
+                } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
+                    document.documentElement.msRequestFullscreen();
+                }
+                document.documentElement.style.background = 'black';
                 fullscreen = true;
             } else {
-                div.style.display = 'none';
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) { /* Firefox */
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) { /* IE/Edge */
+                    document.msExitFullscreen();
+                }
+                document.documentElement.style.background = 'white';
                 fullscreen = false;
             }
         }
