@@ -16,36 +16,45 @@
             -ms-user-select: none; /* IE10+/Edge */
             user-select: none; /* Standard */
         }
+        button {
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            background: black;
+            color: rgb(48, 46, 46);
+            border: none;
+            height: 100vh;
+            width: 100vw;
+            padding-bottom: 100vh;
+        }
     </style>
 </head>
-<body ondblclick="toggleFullScreen()">
-    <p>Double click the screen to toggle full screen!</p>
+<body>
+    <button onclick="toggleFullScreen()">Toggle Full Screen</button>
     <script>
         var fullscreen = false;
         function toggleFullScreen() {
             if (!fullscreen) {
                 if (document.documentElement.requestFullscreen) {
                     document.documentElement.requestFullscreen();
-                } else if (document.documentElement.mozRequestFullScreen) { /* Firefox */
+                } else if (document.documentElement.mozRequestFullScreen) {
                     document.documentElement.mozRequestFullScreen();
-                } else if (document.documentElement.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                } else if (document.documentElement.webkitRequestFullscreen) {
                     document.documentElement.webkitRequestFullscreen();
-                } else if (document.documentElement.msRequestFullscreen) { /* IE/Edge */
+                } else if (document.documentElement.msRequestFullscreen) {
                     document.documentElement.msRequestFullscreen();
                 }
-                document.documentElement.style.background = 'black';
                 fullscreen = true;
             } else {
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
-                } else if (document.mozCancelFullScreen) { /* Firefox */
+                } else if (document.mozCancelFullScreen) {
                     document.mozCancelFullScreen();
-                } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+                } else if (document.webkitExitFullscreen) {
                     document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) { /* IE/Edge */
+                } else if (document.msExitFullscreen) {
                     document.msExitFullscreen();
                 }
-                document.documentElement.style.background = 'white';
                 fullscreen = false;
             }
         }
