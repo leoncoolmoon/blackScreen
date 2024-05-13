@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            background: white;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .fullscreen {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: black;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body ondblclick="toggleFullScreen()">
+    <div id="fullscreen" class="fullscreen"></div>
+    <script>
+        var fullscreen = false;
+        function toggleFullScreen() {
+            var div = document.getElementById('fullscreen');
+            if (!fullscreen) {
+                div.style.display = 'block';
+                fullscreen = true;
+            } else {
+                div.style.display = 'none';
+                fullscreen = false;
+            }
+        }
+    </script>
+</body>
+</html>
