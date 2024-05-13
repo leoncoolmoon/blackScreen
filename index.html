@@ -26,13 +26,26 @@
             height: 100vh;
             width: 100vw;
             padding-bottom: 100vh;
+            text-align: left;
         }
     </style>
 </head>
 <body>
-    <button onclick="toggleFullScreen()">Toggle Full Screen</button>
+    <button id="tmbt" onclick="toggleFullScreen()">Toggle Full Screen</button>
     <script>
         var fullscreen = false;
+        var timeButton = document.getElementById('tmbt');
+
+        function updateTime() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            // Ensure double digits
+            if (hours < 10) hours = "0" + hours;
+            if (minutes < 10) minutes = "0" + minutes;
+            timeButton.textContent = hours + ":" + minutes;
+        }
+
         function toggleFullScreen() {
             if (!fullscreen) {
                 if (document.documentElement.requestFullscreen) {
@@ -58,6 +71,16 @@
                 fullscreen = false;
             }
         }
+        updateTime();
+         var now = new Date();
+        var millisecondsUntilNextMinute = (60 - now.getSeconds()) * 1000;
+
+        // Set a timeout to update the time at the start of the next minute
+        setTimeout(function() {
+            updateTime();
+            // Then update the time every minute thereafter
+            setInterval(updateTime, 60000);
+        }, millisecondsUntilNextMinute);
     </script>
 </body>
 </html>
